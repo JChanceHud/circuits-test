@@ -10,10 +10,10 @@ WORKDIR=$(mktemp -d)
 CIRCUIT_NAME=test
 
 # compile the circuits
-circom $BASEDIR/../${CIRCUIT_NAME}.circom --r1cs --wasm --sym --c -o $WORKDIR
+circom $BASEDIR/../circuits/${CIRCUIT_NAME}.circom --r1cs --wasm --sym --c -o $WORKDIR
 
 # generate a witness
-node $WORKDIR/${CIRCUIT_NAME}_js/generate_witness.js $WORKDIR/${CIRCUIT_NAME}_js/${CIRCUIT_NAME}.wasm $BASEDIR/../input.json $WORKDIR/witness.wtns
+node $WORKDIR/${CIRCUIT_NAME}_js/generate_witness.js $WORKDIR/${CIRCUIT_NAME}_js/${CIRCUIT_NAME}.wasm $BASEDIR/../circuits/${CIRCUIT_NAME}.json $WORKDIR/witness.wtns
 
 # run an insecure powers of tau to $CIRCUIT_NAME the zk proof
 snarkjs powersoftau new bn128 12 $WORKDIR/pot12_0000.ptau -v

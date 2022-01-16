@@ -5,6 +5,9 @@ template Test () {
   signal input b;
   signal output c;
 
+  assert(a != 1);
+  assert(b != 1);
+
   c <== a * b;
 }
 
