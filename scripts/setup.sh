@@ -7,7 +7,7 @@ which circom > /dev/null
 
 BASEDIR=$(dirname $(readlink -f "$0"))
 WORKDIR=$(mktemp -d)
-CIRCUIT_NAME=test
+CIRCUIT_NAME=auth
 
 # compile the circuits
 circom $BASEDIR/../circuits/${CIRCUIT_NAME}.circom --r1cs --wasm --sym --c -o $WORKDIR
@@ -27,3 +27,4 @@ snarkjs zkey export verificationkey $WORKDIR/${CIRCUIT_NAME}_0001.zkey $WORKDIR/
 echo "Proving..."
 snarkjs groth16 prove $WORKDIR/${CIRCUIT_NAME}_0001.zkey $WORKDIR/witness.wtns $WORKDIR/proof.json $WORKDIR/public.json
 snarkjs groth16 verify $WORKDIR/verification_key.json $WORKDIR/public.json $WORKDIR/proof.json
+cat $WORKDIR/public.json

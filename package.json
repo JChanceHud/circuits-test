@@ -9,6 +9,8 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "circomlib": "^2.0.2",
+    "circomlibjs": "^0.1.1",
     "snarkjs": "^0.4.10"
   }
 }
